@@ -9627,7 +9627,10 @@ bool NodeCacheContainer_t::WarmupCache ( ExtNode_i * pChild, int iQwords )
 		if ( m_pNodeCache->m_iMaxCachedDocs<0 || m_pNodeCache->m_iMaxCachedHits<0 )
 		{
 			Invalidate ();
-			pChild->Reset ( *m_pSetup );
+			
+			if ( m_pSetup )
+				pChild->Reset ( *m_pSetup );
+
 			m_pSetup = NULL;
 			return false;
 		}
@@ -9640,7 +9643,10 @@ bool NodeCacheContainer_t::WarmupCache ( ExtNode_i * pChild, int iQwords )
 
 	m_Docs.Add().m_uDocid = DOCID_MAX;
 	m_Hits.Add().m_uDocid = DOCID_MAX;
-	pChild->Reset ( *m_pSetup );
+	
+	if ( m_pSetup )
+		pChild->Reset ( *m_pSetup );
+	
 	m_pSetup = NULL;
 	return true;
 }
